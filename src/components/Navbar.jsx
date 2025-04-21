@@ -8,7 +8,7 @@ function Navbar() {
       <div>
         <Link to="/">Home</Link>
         <Link to="/moods">Mood tunes</Link>
-        <Link to="/journal">Journaling</Link> {/* Changed /submit to /journal */}
+        <Link to="/journal">Journal Entry</Link> {/* Changed /submit to /journal */}
       </div>
     </nav>
   )
