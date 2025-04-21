@@ -1,31 +1,363 @@
+/* General Body Styling */
 body {
+  font-family: 'Arial', sans-serif;
+  background-color: #fdf1e4; /* Soft warm cream background */
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f8f8;
+  padding: 0;
 }
 
+/* Links */
 a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.3s ease;
 }
 
+a:hover {
+  color: #ff7f50; /* Warm coral color on hover */
+}
+
+/* Navbar Styling */
 .navbar {
-  background-color: #1e1e1e;
-  color: white;
+  background-color: #ff8c42; /* Warm amber-orange background */
+  color: #fff;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
+.navbar h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.navbar div {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar div a {
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar div a:hover {
+  background-color: #ff7f50; /* Button-like hover effect */
+  color: white;
+}
+
+/* Main Container */
 .container {
+  padding: 2rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card Styles */
+.card {
+  background-color: white;
   padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Subtle lift on hover */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+}
+
+.card h2 {
+  font-size: 2rem;
+  color: #ff8c42; /* Warm amber color for headings */
+  margin-bottom: 1rem;
+}
+
+.card p {
+  font-size: 1.2rem;
+  color: #4e4b47; /* Earthy brown text color */
+  line-height: 1.6;
+}
+
+/* Button Style for Actions */
+button {
+  background-color: #ff7f50; /* Coral button */
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff5b3f; /* Darker coral on hover */
+}
+
+/* Page-specific styles */
+h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #ff8c42; /* Warm amber color for titles */
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive Layouts */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar div {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+/* Home Page */
+/* src/App.css or src/styles.css */
+.home-page {
+  padding: 20px;
+  text-align: center;
+}
+
+.post-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
 .card {
-  background: white;
-  padding: 1.5rem;
+  background-color: #fff;
   border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* src/index.css or src/App.css */
+.submit-page {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.submit-page h2 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+}
+
+textarea {
+  height: 200px;
+}
+
+button {
+  padding: 10px;
+  background-color: #f97f59;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ff5722;
+}
+.success-msg {
+  color: green;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+
+/*mood*/
+.mood-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mood-button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #ff8c42;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.mood-button.selected {
+  background-color: #ff7f50;
+}
+
+.playlist-creation {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.playlist-creation input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.scroll-container {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #ff8c42;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #ff7f50;
+}
+
+.song-card {
   margin-bottom: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.song-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.add-button {
+  margin-top: 0.5rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-button {
+  margin-top: 0.5rem;
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.playlist-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.playlist-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fef9f6;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-top: 1rem;
+}
+
+.song-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.intro-banner {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #ffe0b2, #ffccbc);
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.intro-banner h1 {
+  font-size: 2rem;
+  color: #ff6f00;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.intro-banner p {
+  font-size: 1.1rem;
+  color: #333;
+  max-width: 700px;
+  margin: 0 auto;
 }
