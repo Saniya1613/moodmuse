@@ -20,29 +20,32 @@ const Home = () => {
     setMessages(updatedMessages);
 
     try {
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      // Adding more specific system prompt for emotional assistance
+      const response = await fetch('https://api-inference.huggingface.co/models/facebook/blenderbot-3B', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
+          'Authorization': `Bearer ${import.meta.env.VITE_HUGGINGFACE_API_KEY}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': 'http://localhost:5173',
-          'X-Title': 'MuseMood Journal',
         },
         body: JSON.stringify({
-          model: 'openai/gpt-3.5-turbo',
-          messages: [{ role: 'system', content: 'You are a friendly mood journaling assistant.' }, ...updatedMessages],
+          inputs: `You are a friendly assistant helping with mood journaling. The user is expressing feelings, respond empathetically: ${journalInput}`,
         }),
       });
 
-      const data = await response.json();
-      const assistantMessage = {
-        role: 'assistant',
-        content: data.choices[0].message.content,
-      };
+      const responseData = await response.json();
+      console.log('Full Hugging Face API Response:', responseData);
 
-      setMessages([...updatedMessages, assistantMessage]);
+      if (responseData && responseData[0] && responseData[0].generated_text) {
+        const assistantMessage = {
+          role: 'assistant',
+          content: responseData[0].generated_text, 
+        };
+        setMessages([...updatedMessages, assistantMessage]);
+      } else {
+        setMessages([...updatedMessages, { role: 'assistant', content: "Oops! No response from the assistant." }]);
+      }
     } catch (error) {
-      console.error(error);
+      console.error('Error fetching from Hugging Face API:', error);
       setMessages([...updatedMessages, { role: 'assistant', content: "Oops! Something went wrong." }]);
     } finally {
       setIsLoading(false);
