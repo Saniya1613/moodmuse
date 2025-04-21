@@ -1,16 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom'; 
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Moods from './pages/Moods';
 import Submit from './pages/Submit';
 import NotFound from './pages/NotFound';
-import { AppProvider } from './context/AppContext'; // Import the AppProvider
+import { AppProvider } from './context/AppContext'; 
 
 function App() {
   return (
     <AppProvider>
-      <Router>
+      <Router> 
         <Navbar />
         <div className="container">
           <Routes>
