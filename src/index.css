@@ -1,9 +1,12 @@
-/* General Body Styling */
+/* -----------------------------
+   General Body & Typography
+------------------------------*/
 body {
   font-family: 'Arial', sans-serif;
   background-color: #fdf1e4; /* Soft warm cream background */
   margin: 0;
   padding: 0;
+  line-height: 1.6; /* Enhanced readability */
 }
 
 /* Links */
@@ -12,20 +15,21 @@ a {
   color: inherit;
   transition: color 0.3s ease;
 }
-
 a:hover {
-  color: #ff7f50; /* Warm coral color on hover */
+  color: #ff7f50; /* Warm coral hover */
 }
 
-/* Navbar Styling */
+/* -----------------------------
+   Navbar Styling
+------------------------------*/
 .navbar {
-  background-color: #ff8c42; /* Warm amber-orange background */
+  background-color: #ff8c42;
   color: #fff;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar h1 {
@@ -42,76 +46,21 @@ a:hover {
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .navbar div a:hover {
-  background-color: #ff7f50; /* Button-like hover effect */
+  background-color: #ff7f50;
   color: white;
+  transform: scale(1.05);
 }
 
-/* Main Container */
-.container {
-  padding: 2rem 3rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Card Styles */
-.card {
-  background-color: white;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px); /* Subtle lift on hover */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Deeper shadow */
-}
-
-.card h2 {
-  font-size: 2rem;
-  color: #ff8c42; /* Warm amber color for headings */
-  margin-bottom: 1rem;
-}
-
-.card p {
-  font-size: 1.2rem;
-  color: #4e4b47; /* Earthy brown text color */
-  line-height: 1.6;
-}
-
-/* Button Style for Actions */
-button {
-  background-color: #ff7f50; /* Coral button */
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #ff5b3f; /* Darker coral on hover */
-}
-
-/* Page-specific styles */
-h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  color: #ff8c42; /* Warm amber color for titles */
-  margin-bottom: 1.5rem;
-}
-
-/* Responsive Layouts */
+/* Responsive Nav & Container */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     align-items: center;
+    padding: 1rem; /* Adjust padding for small screens */
   }
 
   .navbar div {
@@ -128,137 +77,190 @@ h2 {
   }
 }
 
-/* Home Page */
-/* src/App.css or src/styles.css */
-.home-page {
-  padding: 20px;
-  text-align: center;
+/* -----------------------------
+   Layout & Containers
+------------------------------*/
+.container {
+  padding: 2rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.post-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
+/* -----------------------------
+   Reusable Card Component
+------------------------------*/
 .card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  transition: transform 0.3s;
+  background-color: white;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+  font-size: 2rem;
 }
 
 .card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333;
+  font-size: 1.25rem; /* Increased font size for better hierarchy */
 }
 
 .card p {
-  font-size: 14px;
-  color: #555;
+  font-size: 1.1rem; /* Slightly increased for readability */
+  color: #4e4b47;
+  line-height: 1.6;
 }
 
-/* src/index.css or src/App.css */
-.submit-page {
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* -----------------------------
+   Buttons (General + CTA)
+------------------------------*/
+button, .add-button, .delete-button, .edit-btn, .delete-btn, .submit-btn {
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  padding: 0.8rem 1.5rem; /* Consistent padding */
+  border-radius: 30px; /* Unified border-radius */
 }
 
-.submit-page h2 {
-  text-align: center;
-  color: #333;
+button,
+.submit-btn {
+  background-color: #ff7f50;
+  color: white;
 }
 
+button:hover,
+.submit-btn:hover {
+  background-color: #ff5b3f;
+}
+
+.add-button,
+.delete-button {
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.add-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.delete-button {
+  background-color: #ff6347;
+  color: white;
+}
+
+.edit-btn {
+  background-color: #ffd966;
+  color: #000;
+  padding: 0.25rem 0.75rem;
+  border-radius: 5px;
+}
+
+.delete-btn {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 5px;
+}
+
+.add-button, .delete-button, .edit-btn, .delete-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* -----------------------------
+   Forms, Inputs & Submit Page
+------------------------------*/
 form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-input, textarea {
-  padding: 10px;
+input,
+textarea {
+  padding: 12px;
   font-size: 16px;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 8px;
   width: 100%;
+  transition: border 0.3s;
 }
 
 textarea {
   height: 200px;
+  resize: vertical;
 }
 
-button {
-  padding: 10px;
-  background-color: #f97f59;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+input:focus,
+textarea:focus {
+  border-color: #ff8c42;
+  outline: none;
+  box-shadow: 0 0 4px rgba(255, 140, 66, 0.5); /* Slight shadow on focus */
 }
 
-button:hover {
-  background-color: #ff5722;
-}
 .success-msg {
   color: green;
-  margin-top: 10px;
   font-weight: bold;
+  margin-top: 10px;
 }
 
-
-/*mood*/
+/* -----------------------------
+   Mood Journal & Playlist
+------------------------------*/
 .mood-buttons {
   display: flex;
-  gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .mood-button {
-  padding: 10px 20px;
-  border-radius: 20px;
   background-color: #ff8c42;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  color: white;
+  border-radius: 20px;
+  padding: 12px 24px; /* Increased padding for better clickability */
+  font-size: 1.1rem;  /* Slight increase for readability */
 }
 
 .mood-button.selected {
   background-color: #ff7f50;
 }
 
-.playlist-creation {
-  margin: 1rem 0;
+.playlist-container {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
+  justify-content: center;
 }
 
-.playlist-creation input {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+.playlist-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  background-color: #fef9f6;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adjusted shadow for consistency */
 }
 
-.scroll-container {
-  max-height: 500px;
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
   overflow-y: auto;
   padding-right: 10px;
+  max-height: 500px;
 }
 
+/* -----------------------------
+   Scrollbar Customization
+------------------------------*/
 .scroll-container::-webkit-scrollbar {
   width: 10px;
 }
@@ -275,74 +277,80 @@ button:hover {
 
 .scroll-container::-webkit-scrollbar-thumb:hover {
   background: #ff7f50;
-}
-
-.song-card {
-  margin-bottom: 1rem;
-}
-
-.song-card img {
-  width: 100%;
   border-radius: 10px;
+  border: 2px solid #fff; /* Adds a bit of contrast */
 }
 
-.add-button {
-  margin-top: 0.5rem;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.delete-button {
-  margin-top: 0.5rem;
-  background-color: #ff6347;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.playlist-container {
+/* -----------------------------
+   Chatbot UI
+------------------------------*/
+.chat-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.playlist-card {
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #fef9f6;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.grid-layout {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.5rem;
-  max-height: 500px;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #e8f5e9;
+  padding: 20px;
+  border-radius: 20px;
+  max-height: 400px;
   overflow-y: auto;
-  padding-right: 10px;
-  margin-top: 1rem;
 }
 
-.song-card img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.message-bubble {
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  max-width: 75%;
+  word-wrap: break-word;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.user-message {
+  align-self: flex-end;
+  background-color: #4caf50;
+  color: white;
+}
+
+.assistant-message {
+  align-self: flex-start;
+  background-color: #a5d6a7;
+  color: #333;
+}
+
+/* Typing Indicator Animation */
+.typing-indicator span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: #666;
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* -----------------------------
+   Hero / Banner Sections
+------------------------------*/
 .intro-banner {
+  background: linear-gradient(135deg, #ffe0b2, #ffccbc);
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #ffe0b2, #ffccbc);
   border-radius: 20px;
   margin-bottom: 2rem;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
@@ -352,7 +360,6 @@ button:hover {
   font-size: 2rem;
   color: #ff6f00;
   margin-bottom: 0.5rem;
-  font-weight: bold;
 }
 
 .intro-banner p {
@@ -360,4 +367,63 @@ button:hover {
   color: #333;
   max-width: 700px;
   margin: 0 auto;
+}
+
+/* -----------------------------
+   Miscellaneous UI Elements
+------------------------------*/
+.empty-state,
+.empty-entries {
+  text-align: center;
+  font-style: italic;
+  padding: 20px;
+  color: #666;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #d32f2f;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.loading-bubble {
+  background-color: #e0e0e0;
+  padding: 12px 20px;
+  border-radius: 25px;
+  width: fit-content;
+  align-self: flex-start;
+}
+
+/* -----------------------------
+   Final Responsive Tweaks
+------------------------------*/
+@media (max-width: 600px) {
+  .grid-layout {
+    grid-template-columns: 1fr; /* Stack grid on smaller screens */
+  }
+
+  .message-bubble {
+    max-width: 85%;
+  }
+}
+
+/* -----------------------------
+   Journal Entries Grid Layout
+------------------------------*/
+.entry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+.entry-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

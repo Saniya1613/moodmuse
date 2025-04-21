@@ -9,15 +9,14 @@ import { AppProvider } from './context/AppContext'; // Import the AppProvider
 
 function App() {
   return (
-    <AppProvider> {/* Wrap the entire app with AppProvider */}
+    <AppProvider>
       <Router>
         <Navbar />
-        
         <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/moods" element={<Moods />} />
-            <Route path="/submit" element={<Submit />} />
+            <Route path="/journal" element={<Submit />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

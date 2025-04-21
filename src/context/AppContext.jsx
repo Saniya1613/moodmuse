@@ -1,15 +1,17 @@
-import React, { createContext, useState, useContext } from "react";
+// context/AppContext.jsx
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
-// Create a context
 const AppContext = createContext();
 
-// Create a provider component
 export const AppProvider = ({ children }) => {
-  const [data, setData] = useState(null); // State to store fetched data
+  const [data, setData] = useState(() => {
+    const saved = localStorage.getItem('journalEntries');
+    return saved ? JSON.parse(saved) : [];
+  });
 
-  // Function to update the data
   const setDataFunc = (newData) => {
     setData(newData);
+    localStorage.setItem('journalEntries', JSON.stringify(newData));
   };
 
   return (
@@ -19,7 +21,4 @@ export const AppProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use the AppContext
-export const useAppContext = () => {
-  return useContext(AppContext);
-};
+export const useAppContext = () => useContext(AppContext);
