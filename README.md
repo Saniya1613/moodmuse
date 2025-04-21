@@ -1,4 +1,4 @@
-# MuseMood 🎶🧠
+# MoodMuse 🎶🧠
 
 ## Description 🌟
 Welcome to **MuseMood**, your cozy corner for **mood-based music exploration** and **introspective journaling**. 🎧📝  
