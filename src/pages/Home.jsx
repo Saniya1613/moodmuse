@@ -15,43 +15,61 @@ const Home = () => {
   const handleJournalSubmit = async () => {
     if (!journalInput) return;
     setIsLoading(true);
+  
     const userMessage = { role: 'user', content: journalInput };
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
-
+  
     try {
-      // Adding more specific system prompt for emotional assistance
-      const response = await fetch('https://api-inference.huggingface.co/models/facebook/blenderbot-3B', {
+      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${import.meta.env.VITE_HUGGINGFACE_API_KEY}`,
+          'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
           'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://your-site.com', // Replace with your deployed site's domain
+          'X-Title': 'MuseMood Journaling Assistant'
         },
         body: JSON.stringify({
-          inputs: `You are a friendly assistant helping with mood journaling. The user is expressing feelings, respond empathetically: ${journalInput}`,
+          model: 'openai/gpt-3.5-turbo',
+          messages: [
+            {
+              role: 'system',
+              content: 'You are a friendly, empathetic journaling companion helping users reflect on emotions, thoughts, and moods with comforting, thoughtful responses.'
+            },
+            ...updatedMessages
+          ],
+          temperature: 0.8,
+          max_tokens: 250
         }),
       });
-
-      const responseData = await response.json();
-      console.log('Full Hugging Face API Response:', responseData);
-
-      if (responseData && responseData[0] && responseData[0].generated_text) {
-        const assistantMessage = {
-          role: 'assistant',
-          content: responseData[0].generated_text, 
-        };
-        setMessages([...updatedMessages, assistantMessage]);
-      } else {
-        setMessages([...updatedMessages, { role: 'assistant', content: "Oops! No response from the assistant." }]);
+  
+      const data = await response.json();
+      console.log('OpenRouter Response:', data);
+  
+      const reply = data?.choices?.[0]?.message?.content?.trim();
+  
+      if (!reply) {
+        throw new Error("No reply from OpenRouter");
       }
+  
+      const assistantMessage = {
+        role: 'assistant',
+        content: reply
+      };
+  
+      setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
-      console.error('Error fetching from Hugging Face API:', error);
-      setMessages([...updatedMessages, { role: 'assistant', content: "Oops! Something went wrong." }]);
+      console.error('Error calling OpenRouter API:', error);
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: "Hmm, I couldn’t respond right now. Want to try again?"
+      }]);
     } finally {
       setIsLoading(false);
       setJournalInput('');
     }
   };
+  
 
   const handleDeleteEntry = (index) => {
     const updatedData = data.filter((_, i) => i !== index);
@@ -138,7 +156,6 @@ const Home = () => {
                 <>
                   <h3>{entry.title}</h3>
 
-                  {/* Show image if exists */}
                   {entry.image && (
                     <div className="entry-image">
                       <img src={entry.image} alt="Journal Visual" />
