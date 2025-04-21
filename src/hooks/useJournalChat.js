@@ -75,4 +75,4 @@ export const useJournalChat = () => {
     sendMessage,
     clearChat
   };
-};
+};queueMicrotask
