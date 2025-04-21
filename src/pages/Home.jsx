@@ -134,6 +134,14 @@ const Home = () => {
               ) : (
                 <>
                   <h3>{entry.title}</h3>
+
+                  {/* Show image if exists */}
+                  {entry.image && (
+                    <div className="entry-image">
+                      <img src={entry.image} alt="Journal Visual" />
+                    </div>
+                  )}
+
                   <p className="entry-content">{entry.body}</p>
                   <small className="entry-date">{entry.date}</small>
                   <div className="entry-actions">
