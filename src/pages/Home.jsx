@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 
 const Home = () => {
+  // Accessing global data and function from context
   const { data, setDataFunc } = useAppContext();
   const navigate = useNavigate();
+
+  // Local state for journal input, chatbot messages, loading status, and edit mode
   const [journalInput, setJournalInput] = useState('');
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -12,21 +15,24 @@ const Home = () => {
   const [newTitle, setNewTitle] = useState('');
   const [newBody, setNewBody] = useState('');
 
+  // Function to submit journal input to OpenRouter API
   const handleJournalSubmit = async () => {
     if (!journalInput) return;
     setIsLoading(true);
-  
+
+    // Add user's input to message history
     const userMessage = { role: 'user', content: journalInput };
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
-  
+
     try {
+      // Call the OpenRouter AI API with journaling prompt
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': 'https://your-site.com', // Replace with your deployed site's domain
+          'HTTP-Referer': 'https://your-site.com', // Replace with actual domain
           'X-Title': 'MuseMood Journaling Assistant'
         },
         body: JSON.stringify({
@@ -42,21 +48,22 @@ const Home = () => {
           max_tokens: 250
         }),
       });
-  
+
       const data = await response.json();
       console.log('OpenRouter Response:', data);
-  
+
       const reply = data?.choices?.[0]?.message?.content?.trim();
-  
+
       if (!reply) {
         throw new Error("No reply from OpenRouter");
       }
-  
+
+      // Add assistant's reply to message history
       const assistantMessage = {
         role: 'assistant',
         content: reply
       };
-  
+
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       console.error('Error calling OpenRouter API:', error);
@@ -69,13 +76,14 @@ const Home = () => {
       setJournalInput('');
     }
   };
-  
 
+  // Function to delete a journal entry
   const handleDeleteEntry = (index) => {
     const updatedData = data.filter((_, i) => i !== index);
     setDataFunc(updatedData);
   };
 
+  // Function to prepare an entry for editing
   const handleEditEntry = (index) => {
     const entry = data[index];
     setNewTitle(entry.title);
@@ -83,6 +91,7 @@ const Home = () => {
     setIsEditing(index);
   };
 
+  // Function to save an edited entry
   const handleSaveEdit = (index) => {
     const updatedData = [...data];
     updatedData[index] = { ...updatedData[index], title: newTitle, body: newBody };
@@ -92,6 +101,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
+      {/* Hero Section */}
       <div className="hero-section card">
         <h1>🎶 Discover Your Mood Through Music</h1>
         <p>
@@ -107,6 +117,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Journaling Chat Section */}
       <div className="journal-section card">
         <h2>🧠 Mood Journal Chatbot</h2>
         <div className="chat-container">
@@ -117,17 +128,21 @@ const Home = () => {
           ))}
         </div>
 
+        {/* Textarea to enter journal input */}
         <textarea
           placeholder="How are you feeling today? Type here..."
           value={journalInput}
           onChange={(e) => setJournalInput(e.target.value)}
           className="journal-textarea"
         />
+
+        {/* Submit Button */}
         <button onClick={handleJournalSubmit} className="btn submit-btn">
           {isLoading ? 'Thinking...' : 'Reflect'}
         </button>
       </div>
 
+      {/* Journal Entries Display */}
       <h2 style={{ marginTop: '2rem' }}>Latest Entries</h2>
       <p style={{ fontStyle: 'italic', color: '#666', marginBottom: '1rem' }}>
         Think of your journal entries as heartfelt letters to your future self. Write with love.
@@ -137,6 +152,7 @@ const Home = () => {
         {data && data.length > 0 ? (
           data.map((entry, index) => (
             <div key={index} className="entry-card">
+              {/* Editing Mode */}
               {isEditing === index ? (
                 <>
                   <input
@@ -154,8 +170,10 @@ const Home = () => {
                 </>
               ) : (
                 <>
+                  {/* Display Entry */}
                   <h3>{entry.title}</h3>
 
+                  {/* Display Optional Image */}
                   {entry.image && (
                     <div className="entry-image">
                       <img src={entry.image} alt="Journal Visual" />

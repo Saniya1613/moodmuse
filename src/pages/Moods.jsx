@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+// 🌈 List of moods for user to choose from
 const moodsList = [
   'Happy 😊', 'Sad 😢', 'Chill 😎', 'Romantic ❤️', 'Energetic ⚡', 'Angry 😠',
   'Melancholy 🌧️', 'Excited 🤩', 'Hopeful 🌟', 'Peaceful 🧘‍♀️',
@@ -7,6 +8,7 @@ const moodsList = [
 ];
 
 const Moods = () => {
+  // 🎯 App states
   const [selectedMood, setSelectedMood] = useState('');
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -14,21 +16,24 @@ const Moods = () => {
   const [newPlaylistName, setNewPlaylistName] = useState('');
   const [viewingPlaylist, setViewingPlaylist] = useState(null);
 
+  // ✅ Handle mood selection
   const handleMoodSelect = (mood) => {
     setSelectedMood(mood);
   };
 
+  // ➕ Add a song to a playlist (if not already in it)
   const handleAddToPlaylist = (playlistName, song) => {
     const updated = {
       ...playlists,
       [playlistName]: playlists[playlistName]?.some(s => s.trackId === song.trackId)
-        ? playlists[playlistName]
+        ? playlists[playlistName] // don't add duplicates
         : [...(playlists[playlistName] || []), song],
     };
     setPlaylists(updated);
     localStorage.setItem('playlists', JSON.stringify(updated));
   };
 
+  // ❌ Remove a song from a playlist
   const handleRemoveSong = (playlistName, trackId) => {
     const updated = {
       ...playlists,
@@ -38,6 +43,7 @@ const Moods = () => {
     localStorage.setItem('playlists', JSON.stringify(updated));
   };
 
+  // 🆕 Create a new playlist (if name is valid and doesn't exist already)
   const handleCreatePlaylist = () => {
     if (!newPlaylistName.trim()) return;
     if (playlists[newPlaylistName]) {
@@ -50,6 +56,7 @@ const Moods = () => {
     localStorage.setItem('playlists', JSON.stringify(updated));
   };
 
+  // 🗑️ Delete an entire playlist
   const handleDeletePlaylist = (playlistName) => {
     const updated = { ...playlists };
     delete updated[playlistName];
@@ -58,6 +65,7 @@ const Moods = () => {
     localStorage.setItem('playlists', JSON.stringify(updated));
   };
 
+  // 🎵 Fetch songs from iTunes API whenever mood is selected
   useEffect(() => {
     const fetchSongs = async () => {
       if (!selectedMood) return;
@@ -77,6 +85,7 @@ const Moods = () => {
     fetchSongs();
   }, [selectedMood]);
 
+  // 🔁 Load playlists from localStorage on first render
   useEffect(() => {
     const stored = localStorage.getItem('playlists');
     if (stored) {
@@ -87,7 +96,7 @@ const Moods = () => {
   return (
     <div className="card">
 
-      {/* 👇 Intro Message */}
+      {/* 🎉 Intro section */}
       <div className="intro-banner">
         <h1>🎶 MoodMuse: Discover Your Vibe</h1>
         <p>
@@ -96,6 +105,7 @@ const Moods = () => {
         </p>
       </div>
 
+      {/* 🌈 Mood selection */}
       <h2>Select Your Mood</h2>
       <div className="mood-buttons">
         {moodsList.map((mood) => (
@@ -109,8 +119,10 @@ const Moods = () => {
         ))}
       </div>
 
+      {/* ⏳ Loading indicator */}
       {loading && <p>Loading songs...</p>}
 
+      {/* 🎧 Display fetched songs */}
       {!loading && songs.length > 0 && (
         <div>
           <h3>Top {selectedMood} Songs</h3>
@@ -121,6 +133,7 @@ const Moods = () => {
                 <h4>{song.trackName}</h4>
                 <p>{song.artistName}</p>
                 <audio controls src={song.previewUrl} />
+                {/* Add to existing playlists */}
                 {Object.keys(playlists).map((name) => (
                   <button
                     key={name}
@@ -136,6 +149,7 @@ const Moods = () => {
         </div>
       )}
 
+      {/* ➕ Create new playlist UI */}
       <div style={{ marginTop: '2rem' }}>
         <h3>Create New Playlist</h3>
         <input
@@ -147,6 +161,7 @@ const Moods = () => {
         <button onClick={handleCreatePlaylist}>Create</button>
       </div>
 
+      {/* 📁 Display all user playlists */}
       {Object.keys(playlists).length > 0 && (
         <div style={{ marginTop: '2rem' }}>
           <h3>Your Playlists</h3>
@@ -162,6 +177,7 @@ const Moods = () => {
         </div>
       )}
 
+      {/* 🎼 View selected playlist songs */}
       {viewingPlaylist && playlists[viewingPlaylist] && (
         <div style={{ marginTop: '2rem' }}>
           <h3>{viewingPlaylist} Playlist</h3>
