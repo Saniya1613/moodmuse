@@ -21,8 +21,11 @@ This app helps you explore the perfect music based on your current mood and refl
   - OpenRouter API (AI assistant for mood journaling) 🤖
 - **Version Control**: 
   - Git (with GitHub for repository management) 🧑‍💻
+- **State Management**: React Context API
+- **AI Integration**: OpenAI (GPT-3.5 for mood journaling assistant)
+- **Data Storage**: localStorage
 
-
+ 
 
 ## Pages & Features Breakdown 🚀
 
@@ -79,14 +82,7 @@ This app helps you explore the perfect music based on your current mood and refl
 
 ---
 
-## Tech Stack 🚀
-- **Frontend**: React, Vite
-- **State Management**: React Context API
-- **AI Integration**: OpenAI (GPT-3.5 for mood journaling assistant)
-- **Styling**: CSS (Styled Components or Regular CSS)
-- **Data Storage**: localStorage
 
----
 
 ## Features ✨
 - Mood-based music exploration 🎶
